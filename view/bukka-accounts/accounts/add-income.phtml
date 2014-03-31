@@ -1,0 +1,15 @@
+<?php
+$title = 'Add income';
+$this->headTitle($title);
+ echo '<h1>' . $this->escapeHtml($title) . '</h1>';
+$form->setAttribute('action', $this->url('accounts', array('action' => 'add-income')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('price'));
+echo $this->formRow($form->get('invoice_id'));
+echo $this->formRow($form->get('description'));
+echo $this->formSubmit($form->get('submit'));
+echo '<a href="' . $this->url('accounts') . '" id="cancelbutton">Cancel</a>';
+echo $this->form()->closeTag();

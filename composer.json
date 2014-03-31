@@ -1,0 +1,30 @@
+{
+    "name": "bukka/bukka-accounts",
+    "description": "Accounts Module - just for testing",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "zend",
+        "module"
+    ],
+    "homepage": "https://github.com/bukka/BukkaAccounts",
+    "authors": [
+        {
+            "name": "Jakub Zelenka",
+            "email": "bukka@php.net",
+            "homepage": "http://bukka.eu/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "BukkaAccounts": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}

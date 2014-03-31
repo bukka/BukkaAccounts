@@ -1,0 +1,78 @@
+<?php
+$title = 'Accounts';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<div id="incomes">
+    <h2 class="income-header">Incomes</h2>
+    <div class="income-add-wrapper"><a href="<?php echo $this->url('accounts', array('action' => 'add-income')); ?>" class="income-add">Add new income</a></div>
+    <table id="incomes-table" width="100%">
+        <thead>
+            <th>Date</th>
+            <th>Invoice ID</th>
+            <th>Cost</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <?php foreach ($incomes as $income): ?>
+            <tr>
+                <td><?php echo $income->income_date; ?></td>
+                <td><?php echo $income->invoice_id; ?></td>
+                <td><?php echo $income->price; ?></td>
+                <td><?php echo $income->description; ?></td>
+                <td><a href="<?php echo $this->url('accounts', array('action' => 'edit-income', 'id' => $income->id)); ?>" class="income-edit">Edit</a> | 
+                    <a href="<?php echo $this->url('accounts', array('action' => 'delete-income', 'id' => $income->id)); ?>" class="income-delete">Delete</a></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<div id="income-delete-dialog" title="Delete income?" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:5px 7px 20px 0;"></span>The income will be permanently deleted. Are you sure?</p>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    var oTable = $('#incomes-table').dataTable({
+        'bJQueryUI': true,
+        'sPaginationType': 'full_numbers'
+    });
+    
+    $('.income-add').button({
+        'icons': {
+            primary: 'ui-icon-plus'
+        }
+    });
+    
+    $('#incomes-table').on('click', '.income-delete', function(e) {
+        var url = $(this).prop('href'), tr = this.parentNode.parentNode;
+        e.preventDefault();
+        console.log(url);
+        $( "#income-delete-dialog" ).dialog({
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Delete": function() {
+                    $.post(url, function(data) {
+                        if (data.error)
+                            alert('Data could not be deleted');
+                        console.log(data);
+                        oTable.fnDeleteRow(tr);
+                    }, 'json');
+                    $( this ).dialog( "close" );
+                },
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+    });
+});
+
+</script>

@@ -1,0 +1,14 @@
+<?php
+$headScript = $this->headScript()
+    ->appendFile($this->basePath() . '/js/bukka-accounts.js')
+    ->appendFile($this->basePath() . '/js/jquery-ui-1.10.4.custom.min.js');
+$headLink = $this->headLink()
+    ->appendStylesheet($this->basePath() . '/css/bukka-accounts.css')
+    ->appendStylesheet($this->basePath() . '/css/jquery-ui-1.10.4.custom.min.css');
+
+if (isset($this->options['extra']) && in_array('data-tables', $this->options['extra'])) {
+    $headScript->appendFile($this->basePath() . '/js/jquery.dataTables.js');
+    $headLink->appendStylesheet($this->basePath() . '/css/demo_table_jui.css');
+}
+
+echo $this->content;

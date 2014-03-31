@@ -1,0 +1,22 @@
+/* BukkaAccounts styles */
+#incomes {
+	position: relative;
+}
+.income-add-wrapper {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+form#income {
+	margin: 20px 0;
+}
+form#income label {
+	display: block;
+	width: 100%;
+}
+
+form#income label > span {
+	display: block;
+	float: left;
+	width: 130px;
+}
